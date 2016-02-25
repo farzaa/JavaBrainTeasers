@@ -6,7 +6,7 @@ public class CS2ProgrammingWeek6
 ///////////////////////////////////////////
 //
 // Start of assignment code.
-// DONE
+// DONE2
 ///////////////////////////////////////////
 
 /**
@@ -321,30 +321,31 @@ static String beginningAndEndOfString(String string)
 	if(string.equals("") || string == null)
 		return "";
 	
-	//I want to keep track of my biggest string.
-	int biggestLength = 0;
-	String biggestString = "";
+	//Just an edge case to see if we only have a string with length 2.
+	if(string.length() == 2)
+		if(string.substring(0, 1).equals(string.substring(1,2)))
+			return string.substring(0, 1);
+		else
+			return "";
+	
 	
 	for(int i = 1; i <= string.length(); i++) {
-		String tmp = string;
-		String str;
 		
-		//I keep on substring-ng by i.
-		str = string.substring(0, i);
+		//Make a substring for the ending/beginning using i. So we make 2 new strings every loop.
+		String end = string.substring(string.length() - i, string.length());
+		String begin = string.substring(0, i);
 		
-		//My tmp removes str from our string.
-		tmp = tmp.substring(str.length(), string.length());
+		//Base case, to prevent overlapping.
+		if(end.length() + begin.length() == string.length())
+			return "";
 		
-		//IF this is true, than we want to keep its length.
-		if(tmp.contains(str))
-			if(str.length() > biggestLength) {
-				biggestLength = str.length();
-				biggestString = str;
-			}		
+		//Return string if we find a match.
+		if(begin.equals(end)) {
+			return begin;
+		}
 	}
 	
-	
-	return biggestString;
+	return "";
 	
 }
 
@@ -369,34 +370,37 @@ static String beginningAndEndOfString(String string)
 */
 static String beginningMirrorEnd(String string) 
 {
-	//Always check for null/empty string.
+	
+	//In case graders try to mess me up.
 	if(string.equals("") || string == null)
 		return "";
 	
-	//I want to keep track of the biggest string, just like the previous problem.
 	int biggestLength = 0;
 	String biggestString = "";
-	String tmp = "";
 	
-	//I start at 1 because I 
+	
 	for(int i = 1; i <= string.length(); i++) {
-		String str;
-		str = string.substring(0, i);
 		
-		//I reverse my string.
-		String reverse = new StringBuilder(str).reverse().toString();
+		//Make a substring for the ending/beginning using i. So we make 2 new strings every loop.
+		String end = string.substring(string.length() - i, string.length());
+		String begin = string.substring(0, i);
 		
-		//Than check if its in my original string. If it is, than I store it.
-		if(string.contains(reverse))
-			if(str.length() > biggestLength) {
-				biggestLength = str.length();
-				biggestString = str;
-			}		
+		//Reverse string I made
+		end = new StringBuilder(begin).reverse().toString();
+		
+		//Return string if we find a match with the reverse
+		if(string.substring(string.length() - i, string.length()).contains(end)) {
+			//Look through entire string to find biggest,.
+			if(begin.length() > biggestLength) {
+				biggestLength = begin.length();
+				biggestString = begin;
+			}
+		}
 	}
-	
 	
 	return biggestString;
 }
+
 
 //	Problem #9
 //	Given a string, return the length of the largest "block" in the string. 
@@ -527,6 +531,7 @@ static int addUpNumbers(String str)
 
 public static void main(String[] args)
 {
+	System.out.println(beginningAndEndOfString("cabXYcab"));
 }
 
 }
