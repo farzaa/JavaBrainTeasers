@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 ///////////////////////////////////////////
-//
+// DONE
 // Test frame for CS2 programming assignments
 //   Created 12-10-2014 by Rick Leinecker
 //
@@ -50,6 +50,32 @@ public class CS2Week7
 	static boolean makeRowOfGoalBricks(int small, int big, int goal) 
 	{
 		
+		//Don't want any input to mess up out output.
+		if(small < 0 && big < 0) {
+			return false;
+		}
+		
+		if(goal < 0)
+			return false;
+		
+		//Take care of negative inputs.
+		if(small < 0)
+			small = 0;
+		if(big < 0)
+			big = 0;
+		
+		//Check if we have the bigs.
+		if(goal > big * 5 + small)
+			return false;
+		
+		//Do we have the smalls to make up for it?
+		else if (goal > 0 && goal % 5 <= small)
+			return true;
+		
+		else
+			return false;
+	
+	/*
 	if(small < 0 && big < 0) {
 		return false;
 	}
@@ -99,7 +125,7 @@ public class CS2Week7
 		return true;
 	
 	return false;
-			
+	*/
 		
 	}
 
@@ -488,7 +514,7 @@ public class CS2Week7
 	
 	public static void main(String[] args)
 	{
-		System.out.println(makeKilosOfChocolate(0, 5, 15));
+		System.out.println(makeRowOfGoalBricks(10, 4, 20));
 	}
 	
 }
